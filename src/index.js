@@ -3,8 +3,11 @@ import getParse from './parse.js';
 import getReadFile from './readfile.js';
 
 const genDiff = (filePath1, filePath2) => {
-  const obj1 = getParse(getReadFile(filePath1));
-  const obj2 = getParse(getReadFile(filePath2));
+  const readFileOne = getReadFile(filePath1);
+  const readFileTwo = getReadFile(filePath2);
+
+  const obj1 = getParse(filePath1, readFileOne);
+  const obj2 = getParse(filePath2, readFileTwo);
 
   const sortedKeys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)));
   let resultStr = '';
