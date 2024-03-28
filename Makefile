@@ -1,3 +1,6 @@
+install:
+	nom ci
+
 gendiff:
 	node bin/gendiff.js
 
