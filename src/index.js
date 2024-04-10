@@ -9,10 +9,10 @@ const genDiff = (filePath1, filePath2) => {
   const keys = _.sortBy(_.union(Object.keys(parsedData1), Object.keys(parsedData2)));
 
   const listData = keys.map((key) => {
-    if (!Object.hasOwn(parsedData2, key)) {
+    if (!Object.hasOwnProperty.call(parsedData2, key)) {
       return `  - ${key}: ${parsedData1[key]}`;
     }
-    if (!Object.hasOwn(parsedData1, key)) {
+    if (!Object.hasOwnProperty.call(parsedData1, key)) {
       return `  + ${key}: ${parsedData2[key]}`;
     }
     if (parsedData1[key] === parsedData2[key]) {
