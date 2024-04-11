@@ -10,4 +10,4 @@
 [![Node CI](https://github.com/GPWD/frontend-project46/actions/workflows/nodejs.yml/badge.svg)](https://github.com/GPWD/frontend-project46/actions)
 
 # Пример запуска
-[![asciicast](https://asciinema.org/a/JbVa1fEeDIJCZndGSjU2VbHk8.svg)](https://asciinema.org/a/JbVa1fEeDIJCZndGSjU2VbHk8)
+[![asciicast](https://asciinema.org/a/u110FMaDNFdovC8SlPhgy21Ls.svg)](https://asciinema.org/a/u110FMaDNFdovC8SlPhgy21Ls)
