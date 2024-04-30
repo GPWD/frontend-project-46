@@ -1,8 +1,7 @@
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import fs from 'node:fs';
-import getReadFile from '../src/readfile.js';
-import genDiff from '../src/index.js';
+import diff from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -12,20 +11,20 @@ const readFixture = (filename) => fs.readFileSync(getFixturePath(filename), 'utf
 
 
 describe('genDiff', () => {
-	test('json format file', () => {
+	test('test json format file', () => {
 		const getPathFile1 = getFixturePath('file1.json');
 		const getPathFile2 = getFixturePath('file2.json');
 		const readExpectedFile = readFixture('expected_file.txt');
 
-		expect(genDiff(getPathFile1, getPathFile2)).toEqual(readExpectedFile);
+		expect(diff(getPathFile1, getPathFile2)).toEqual(readExpectedFile);
 	});
 
-	test('yml and yaml format file', () => {
+	test('test yml and yaml format file', () => {
 		const getPathFile1 = getFixturePath('file1.yml');
 		const getPathFile2 = getFixturePath('file2.yml');
 		const readExpectedFile = readFixture('expected_file.txt');
 
-		expect(genDiff(getPathFile1, getPathFile2)).toEqual(readExpectedFile);
+		expect(diff(getPathFile1, getPathFile2)).toEqual(readExpectedFile);
 	})
 });
 
