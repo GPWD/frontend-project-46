@@ -13,11 +13,9 @@ const diff = (filePath1, filePath2, formater = stylish) => {
       if (!Object.hasOwnProperty.call(obj2, key)) {
         return { key, type: 'deleted', value: obj1[key] };
       }
-
       if (!Object.hasOwnProperty.call(obj1, key)) {
         return { key, type: 'added', value: obj2[key] };
       }
-
       if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
         return { key, type: 'nested', children: iter(obj1[key], obj2[key]) };
       }
@@ -35,7 +33,6 @@ const diff = (filePath1, filePath2, formater = stylish) => {
 
     return res;
   };
-
   return formater(iter(parsedData1, parsedData2));
 };
 
