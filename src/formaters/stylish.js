@@ -1,23 +1,23 @@
 import _ from 'lodash';
 
+const stringify = (data, depth) => {
+  if (!_.isObject(data)) {
+    return `${data}`;
+  }
+
+  const lines = Object.entries(data).map(([key, prop]) => {
+    const preparedValue = stringify(prop, depth + 1);
+    const indent = ' '.repeat((depth * 4));
+    return `${indent}${key}: ${preparedValue}`;
+  });
+
+  const outIndent = ' '.repeat((depth * 4) - 4);
+  const rawResult = ['{', ...lines, `${outIndent}}`].join('\n');
+
+  return rawResult;
+};
+
 const stylish = (listObjects) => {
-  const stringify = (data, depth) => {
-    if (!_.isObject(data)) {
-      return `${data}`;
-    }
-
-    const lines = Object.entries(data).map(([key, prop]) => {
-      const preparedValue = stringify(prop, depth + 1);
-      const indent = ' '.repeat((depth * 4));
-      return `${indent}${key}: ${preparedValue}`;
-    });
-
-    const outIndent = ' '.repeat((depth * 4) - 4);
-    const rawResult = ['{', ...lines, `${outIndent}}`].join('\n');
-
-    return rawResult;
-  };
-
   const iter = (coll, depth) => {
     const space = ' '.repeat((depth * 4) - 2);
     const res = coll.map((obj) => {
