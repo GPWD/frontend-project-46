@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import getParse from './parsers.js';
 import getReadFile from './readfile.js';
-import stylish from './formaters/stylish.js';
+import formatDiff from './formatters/index.js';
 
 const compareKeys = (key, obj1, obj2, iter) => {
   if (!Object.hasOwnProperty.call(obj2, key)) {
@@ -19,15 +19,15 @@ const compareKeys = (key, obj1, obj2, iter) => {
   if (obj1[key] !== obj2[key]) {
     return {
       key,
-      type: 'changes',
+      type: 'changed',
       value1: obj1[key],
       value2: obj2[key],
     };
   }
-  return { key, type: 'unchanges', value: obj1[key] };
+  return { key, type: 'unchanged', value: obj1[key] };
 };
 
-const diff = (filePath1, filePath2, formater = stylish) => {
+const diff = (filePath1, filePath2, formatName = 'stylish') => {
   const parsedData1 = getParse(filePath1, getReadFile(filePath1));
   const parsedData2 = getParse(filePath2, getReadFile(filePath2));
 
@@ -36,7 +36,9 @@ const diff = (filePath1, filePath2, formater = stylish) => {
     return keys.map((key) => compareKeys(key, obj1, obj2, iter));
   };
 
-  return formater(iter(parsedData1, parsedData2));
+  const tree = iter(parsedData1, parsedData2);
+
+  return formatDiff(tree, formatName);
 };
 
 export default diff;
