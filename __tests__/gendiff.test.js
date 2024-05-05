@@ -11,22 +11,52 @@ const readFixture = (filename) => fs.readFileSync(getFixturePath(filename), 'utf
 
 
 describe('genDiff', () => {
-	test('test json format file', () => {
+	test('stylish formatter test', () => {
 		const getPathFile1 = getFixturePath('file1.json');
 		const getPathFile2 = getFixturePath('file2.json');
-		const readExpectedFile = readFixture('expected_file.txt');
+		const readExpectedFile = readFixture('stylish_file.txt');
 
 		expect(diff(getPathFile1, getPathFile2)).toEqual(readExpectedFile);
 	});
 
-	test('test yml and yaml format file', () => {
+	test('stylish formatter test', () => {
 		const getPathFile1 = getFixturePath('file1.yml');
 		const getPathFile2 = getFixturePath('file2.yml');
-		const readExpectedFile = readFixture('expected_file.txt');
+		const readExpectedFile = readFixture('stylish_file.txt');
 
 		expect(diff(getPathFile1, getPathFile2)).toEqual(readExpectedFile);
 	})
+
+	test('plain formater test', () => {
+		const getPathFile1 = getFixturePath('file1.json');
+		const getPathFile2 = getFixturePath('file2.json');
+		const readExpectedFile = readFixture('plain_file.txt');
+
+		expect(diff(getPathFile1, getPathFile2, 'plain')).toEqual(readExpectedFile);
+	});
+
+	test('plain formater test', () => {
+		const getPathFile1 = getFixturePath('file1.yml');
+		const getPathFile2 = getFixturePath('file2.yml');
+		const readExpectedFile = readFixture('plain_file.txt');
+
+		expect(diff(getPathFile1, getPathFile2, 'plain')).toEqual(readExpectedFile);
+	});
+
+	test('jsonFormat formater test', () => {
+		const getPathFile1 = getFixturePath('file1.json');
+		const getPathFile2 = getFixturePath('file2.json');
+		const readExpectedFile = readFixture('jsonFormat_file.txt');
+
+		expect(diff(getPathFile1, getPathFile2, 'json')).toEqual(readExpectedFile);
+	});
+
+	test('jsonFormat formater test', () => {
+		const getPathFile1 = getFixturePath('file1.yml');
+		const getPathFile2 = getFixturePath('file2.yml');
+		const readExpectedFile = readFixture('jsonFormat_file.txt');
+
+		expect(diff(getPathFile1, getPathFile2, 'json')).toEqual(readExpectedFile);
+	})
 });
-
-
 
