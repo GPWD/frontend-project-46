@@ -27,10 +27,10 @@ const stylish = (listObjects) => {
       if (obj.type === 'deleted') {
         return `${space}- ${obj.key}: ${stringify(obj.value, depth + 1)}`;
       }
-      if (obj.type === 'unchanges') {
+      if (obj.type === 'unchanged') {
         return `${space}  ${obj.key}: ${stringify(obj.value, depth + 1)}`;
       }
-      if (obj.type === 'changes') {
+      if (obj.type === 'changed') {
         return `${space}- ${obj.key}: ${stringify(obj.value1, depth + 1)}\n${space}+ ${obj.key}: ${stringify(obj.value2, depth + 1)}`;
       }
 
