@@ -21,21 +21,20 @@ const stylish = (listObjects) => {
   const iter = (coll, depth) => {
     const space = ' '.repeat((depth * 4) - 2);
     const res = coll.map((obj) => {
-      if (obj.type === 'added') {
-        return `${space}+ ${obj.key}: ${stringify(obj.value, depth + 1)}`;
+      switch (obj.type) {
+        case 'added':
+          return `${space}+ ${obj.key}: ${stringify(obj.value, depth + 1)}`;
+        case 'deleted':
+          return `${space}- ${obj.key}: ${stringify(obj.value, depth + 1)}`;
+        case 'unchanged':
+          return `${space}  ${obj.key}: ${stringify(obj.value, depth + 1)}`;
+        case 'changed':
+          return `${space}- ${obj.key}: ${stringify(obj.value1, depth + 1)}\n${space}+ ${obj.key}: ${stringify(obj.value2, depth + 1)}`;
+        case 'nested':
+          return `${space}  ${obj.key}: ${stringify(iter(obj.children, depth + 1), 1)}`;
+        default:
+          throw new Error(`Type is not defined - ${obj.type}`);
       }
-      if (obj.type === 'deleted') {
-        return `${space}- ${obj.key}: ${stringify(obj.value, depth + 1)}`;
-      }
-      if (obj.type === 'unchanged') {
-        return `${space}  ${obj.key}: ${stringify(obj.value, depth + 1)}`;
-      }
-      if (obj.type === 'changed') {
-        return `${space}- ${obj.key}: ${stringify(obj.value1, depth + 1)}\n${space}+ ${obj.key}: ${stringify(obj.value2, depth + 1)}`;
-      }
-
-      const processedData = iter(obj.children, depth + 1);
-      return `${space}  ${obj.key}: ${stringify(processedData, 1)}`;
     });
     const externalIndent = ' '.repeat((depth * 4) - 4);
     return ['{', ...res, `${externalIndent}}`].join('\n');
