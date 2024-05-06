@@ -58,6 +58,15 @@ gendiff --format json <name of file1> <name of file2>
 ```
 
 ## Demonstration
+
+### Compare flat json-files in defaul format:
 [![asciicast](https://asciinema.org/a/u110FMaDNFdovC8SlPhgy21Ls.svg)](https://asciinema.org/a/u110FMaDNFdovC8SlPhgy21Ls)
+
+### Compare nested files json and yaml in default format:
 [![asciicast](https://asciinema.org/a/ZA50uZzdCHivpw1CGzSgXoSlr.svg)](https://asciinema.org/a/ZA50uZzdCHivpw1CGzSgXoSlr)
-[![asciicast](https://asciinema.org/a/8wRvDigsDZnhFpP0DFFoGqSk3.svg)](https://asciinema.org/a/8wRvDigsDZnhFpP0DFFoGqSk3)
+
+### Compare nested files json and yaml in palin format:
+[![asciicast](https://asciinema.org/a/XtMnqi26BWxFv06y9iSpP66mI.svg)](https://asciinema.org/a/XtMnqi26BWxFv06y9iSpP66mI)
+
+### Compare nested files json and yaml in json format
+[![asciicast](https://asciinema.org/a/OLN3EJJl1AjcJ6a8Fxmqe8RCF.svg)](https://asciinema.org/a/OLN3EJJl1AjcJ6a8Fxmqe8RCF)
