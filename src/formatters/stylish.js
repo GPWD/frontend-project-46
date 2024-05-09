@@ -1,17 +1,17 @@
 import _ from 'lodash';
 
-const stringify = (data, depth) => {
+const stringify = (data, depth, spaceCount = 4) => {
   if (!_.isObject(data)) {
     return `${data}`;
   }
 
   const lines = Object.entries(data).map(([key, prop]) => {
     const preparedValue = stringify(prop, depth + 1);
-    const indent = ' '.repeat((depth * 4));
+    const indent = ' '.repeat((depth * spaceCount));
     return `${indent}${key}: ${preparedValue}`;
   });
 
-  const outIndent = ' '.repeat((depth * 4) - 4);
+  const outIndent = ' '.repeat((depth * spaceCount) - spaceCount);
   const rawResult = ['{', ...lines, `${outIndent}}`].join('\n');
 
   return rawResult;
@@ -19,7 +19,10 @@ const stringify = (data, depth) => {
 
 const stylish = (listObjects) => {
   const iter = (coll, depth) => {
-    const space = ' '.repeat((depth * 4) - 2);
+    const spaceCount = 4;
+    const leftShift = 2;
+
+    const space = ' '.repeat((depth * spaceCount) - leftShift);
     const res = coll.map((obj) => {
       switch (obj.type) {
         case 'added':
@@ -36,7 +39,7 @@ const stylish = (listObjects) => {
           throw new Error(`Type is not defined - ${obj.type}`);
       }
     });
-    const externalIndent = ' '.repeat((depth * 4) - 4);
+    const externalIndent = ' '.repeat((depth * spaceCount) - spaceCount);
     return ['{', ...res, `${externalIndent}}`].join('\n');
   };
 
