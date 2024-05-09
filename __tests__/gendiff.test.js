@@ -9,52 +9,22 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFixture = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-describe('genDiff', () => {
-  test('stylish formatter test (json file)', () => {
-    const getPathFile1 = getFixturePath('file1.json');
-    const getPathFile2 = getFixturePath('file2.json');
-    const readExpectedFile = readFixture('stylish_file.txt');
+const getDiff = (file1Name, file2Name, format) => {
+	const getPathFile1 = getFixturePath(file1Name);
+	const getPathFile2 = getFixturePath(file2Name);
 
-    expect(diff(getPathFile1, getPathFile2)).toEqual(readExpectedFile);
-  });
+	return diff(getPathFile1, getPathFile2, format);
+};
 
-  test('stylish formatter test (yml file)', () => {
-    const getPathFile1 = getFixturePath('file1.yml');
-    const getPathFile2 = getFixturePath('file2.yml');
-    const readExpectedFile = readFixture('stylish_file.txt');
+const testData = [
+	['file1.json', 'file2.json', 'stylish', 'stylish_file.txt'],
+	['file1.yml', 'file2.yml', 'stylish', 'stylish_file.txt'],
+	['file1.json', 'file2.json', 'plain', 'plain_file.txt'],
+	['file1.yml', 'file2.yml', 'plain', 'plain_file.txt'],
+	['file1.json', 'file2.json', 'json', 'jsonFormat_file.txt'],
+	['file1.yml', 'file2.yml', 'json', 'jsonFormat_file.txt'],
+];
 
-    expect(diff(getPathFile1, getPathFile2)).toEqual(readExpectedFile);
-  });
-
-  test('plain formater test (json file)', () => {
-    const getPathFile1 = getFixturePath('file1.json');
-    const getPathFile2 = getFixturePath('file2.json');
-    const readExpectedFile = readFixture('plain_file.txt');
-
-    expect(diff(getPathFile1, getPathFile2, 'plain')).toEqual(readExpectedFile);
-  });
-
-  test('plain formater test (yml file)', () => {
-    const getPathFile1 = getFixturePath('file1.yml');
-    const getPathFile2 = getFixturePath('file2.yml');
-    const readExpectedFile = readFixture('plain_file.txt');
-
-    expect(diff(getPathFile1, getPathFile2, 'plain')).toEqual(readExpectedFile);
-  });
-
-  test('jsonFormat formater test (json file)', () => {
-    const getPathFile1 = getFixturePath('file1.json');
-    const getPathFile2 = getFixturePath('file2.json');
-    const readExpectedFile = readFixture('jsonFormat_file.txt');
-
-    expect(diff(getPathFile1, getPathFile2, 'json')).toEqual(readExpectedFile);
-  });
-
-  test('jsonFormat formater test (yml file)', () => {
-    const getPathFile1 = getFixturePath('file1.yml');
-    const getPathFile2 = getFixturePath('file2.yml');
-    const readExpectedFile = readFixture('jsonFormat_file.txt');
-
-    expect(diff(getPathFile1, getPathFile2, 'json')).toEqual(readExpectedFile);
-  });
+test.each(testData)('diff(%s, %s, format %s) equals %s', (file1, file2, format, expected) => {
+	expect(getDiff(file1, file2, format)).toEqual(readFixture(expected));
 });
