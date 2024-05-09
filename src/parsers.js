@@ -1,15 +1,14 @@
-import path from 'node:path';
 import yaml from 'js-yaml';
 import getReadFile from './readfile.js';
 
 const getParse = (filePath, file) => {
-  const formatFile = path.extname(filePath);
+  const formatFile = filePath.split('.').at(-1);
 
-  if (formatFile === '.json') {
+  if (formatFile === 'json') {
     return JSON.parse(file);
   }
 
-  if (formatFile === '.yml' || formatFile === '.yaml') {
+  if (formatFile === 'yml' || formatFile === 'yaml') {
     return yaml.load(getReadFile(filePath));
   }
   return file;
