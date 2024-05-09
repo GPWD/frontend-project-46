@@ -5,7 +5,7 @@ const stringify = (value) => {
     return `'${value}'`;
   }
   if (value === null) {
-    return null;
+    return 'null';
   }
   if (_.isPlainObject(value)) {
     return '[complex value]';
