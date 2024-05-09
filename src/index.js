@@ -4,11 +4,11 @@ import getReadFile from './readfile.js';
 import formatDiff from './formatters/index.js';
 
 const compareKeys = (key, obj1, obj2, iter) => {
-  if (!Object.hasOwnProperty.call(obj2, key)) {
+  if (!obj2.hasOwnProperty(key)) {
     return { key, type: 'deleted', value: obj1[key] };
   }
 
-  if (!Object.hasOwnProperty.call(obj1, key)) {
+  if (!obj1.hasOwnProperty(key)) {
     return { key, type: 'added', value: obj2[key] };
   }
 
